@@ -21,15 +21,9 @@ Bash
 
 git clone https://github.com/YourUsername/file-organizer-tool.git
 cd Folorg
-
-----------------
-Install the required libraries:
-Bash
-
-pip install -r requirements.txt
-
 ----------------
 Run the application:
+
 To launch the GUI, run the app.py file:
 Bash
 python app.py

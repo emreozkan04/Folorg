@@ -1,8 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
-from ttkthemes import ThemedTk
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
+from tkinter import filedialog, messagebox, ttk
 import os
 import shutil
 import json
@@ -19,49 +16,50 @@ class FileOrganizerApp:
         self.root = root
         self.root.title("Folorg")
         self.root.geometry("600x400")
-        
-        self.style = ttk.Style(theme="litera")
 
-        self.directory_path = tk.StringVar()
-
+        # Main frame with padding
         main_frame = ttk.Frame(root, padding=20)
-        main_frame.pack(fill=BOTH, expand=True)
+        main_frame.pack(fill=tk.BOTH, expand=True)
 
+        # Title Label
         title_label = ttk.Label(main_frame, text="Folorg", font=("Helvetica", 24, "bold"), anchor="center")
         title_label.pack(pady=(0, 20))
 
+        # Directory selection
         dir_frame = ttk.Frame(main_frame)
-        dir_frame.pack(pady=10, fill=X)
+        dir_frame.pack(pady=10, fill=tk.X)
 
         dir_label = ttk.Label(dir_frame, text="Selected Directory:", font=("Helvetica", 12))
-        dir_label.pack(side=LEFT, padx=(0, 10))
+        dir_label.pack(side=tk.LEFT, padx=(0, 10))
 
+        self.directory_path = tk.StringVar()
         self.dir_entry = ttk.Entry(dir_frame, textvariable=self.directory_path, font=("Helvetica", 10))
-        self.dir_entry.pack(side=LEFT, fill=X, expand=True)
+        self.dir_entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        browse_button = ttk.Button(dir_frame, text="Browse", command=self.browse_directory, style="info.TButton")
-        browse_button.pack(side=LEFT, padx=(10, 0))
+        browse_button = ttk.Button(dir_frame, text="Browse", command=self.browse_directory)
+        browse_button.pack(side=tk.LEFT, padx=(10, 0))
 
+        # Action buttons
         button_frame = ttk.Frame(main_frame)
-        button_frame.pack(pady=20, fill=X)
+        button_frame.pack(pady=20, fill=tk.X)
 
         organize_label = ttk.Label(button_frame, text="Organize Files", font=("Helvetica", 14, "bold"))
         organize_label.grid(row=0, column=0, columnspan=2, pady=(10, 5))
 
-        self.organize_button = ttk.Button(button_frame, text="By Type", command=self.organize_by_type, style="primary.TButton")
-        self.organize_button.grid(row=1, column=0, padx=5, pady=5, sticky=EW)
+        self.organize_button = ttk.Button(button_frame, text="By Type", command=self.organize_by_type)
+        self.organize_button.grid(row=1, column=0, padx=5, pady=5, sticky=tk.EW)
 
-        self.date_sort_button = ttk.Button(button_frame, text="By Date", command=self.organize_by_date, style="primary.TButton")
-        self.date_sort_button.grid(row=1, column=1, padx=5, pady=5, sticky=EW)
+        self.date_sort_button = ttk.Button(button_frame, text="By Date", command=self.organize_by_date)
+        self.date_sort_button.grid(row=1, column=1, padx=5, pady=5, sticky=tk.EW)
 
         utility_label = ttk.Label(button_frame, text="Utilities", font=("Helvetica", 14, "bold"))
         utility_label.grid(row=2, column=0, columnspan=2, pady=(10, 5))
 
-        self.cleanup_button = ttk.Button(button_frame, text="Find Duplicates", command=self.find_duplicates_action, style="warning.TButton")
-        self.cleanup_button.grid(row=3, column=0, padx=5, pady=5, sticky=EW)
+        self.cleanup_button = ttk.Button(button_frame, text="Find Duplicates", command=self.find_duplicates_action)
+        self.cleanup_button.grid(row=3, column=0, padx=5, pady=5, sticky=tk.EW)
 
-        self.undo_button = ttk.Button(button_frame, text="Undo", command=self.undo_last_action, style="danger.TButton")
-        self.undo_button.grid(row=3, column=1, padx=5, pady=5, sticky=EW)
+        self.undo_button = ttk.Button(button_frame, text="Undo", command=self.undo_last_action)
+        self.undo_button.grid(row=3, column=1, padx=5, pady=5, sticky=tk.EW)
 
         button_frame.grid_columnconfigure(0, weight=1)
         button_frame.grid_columnconfigure(1, weight=1)
@@ -116,16 +114,16 @@ class FileOrganizerApp:
         cleanup_window.geometry("600x400")
         
         frame = ttk.Frame(cleanup_window, padding="10")
-        frame.pack(fill=BOTH, expand=True)
+        frame.pack(fill=tk.BOTH, expand=True)
 
         listbox_frame = ttk.Frame(frame)
-        listbox_frame.pack(fill=BOTH, expand=True)
+        listbox_frame.pack(fill=tk.BOTH, expand=True)
 
         listbox = tk.Listbox(listbox_frame, selectmode=tk.MULTIPLE, font=("Helvetica", 9))
-        listbox.pack(side=LEFT, fill=BOTH, expand=True)
+        listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         scrollbar = ttk.Scrollbar(listbox_frame, orient=tk.VERTICAL, command=listbox.yview)
-        scrollbar.pack(side=RIGHT, fill=Y)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         listbox.config(yscrollcommand=scrollbar.set)
         
         for file_hash, file_paths in duplicates.items():
@@ -162,10 +160,10 @@ class FileOrganizerApp:
                 messagebox.showinfo("Success", "Selected duplicates have been deleted.")
                 cleanup_window.destroy()
 
-        delete_button = ttk.Button(frame, text="Delete Selected", command=delete_selected_duplicates, style="danger.TButton")
+        delete_button = ttk.Button(frame, text="Delete Selected", command=delete_selected_duplicates)
         delete_button.pack(pady=10)
 
 if __name__ == "__main__":
-    root = ThemedTk(theme="litera")
+    root = tk.Tk()
     app = FileOrganizerApp(root)
     root.mainloop()
