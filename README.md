@@ -18,8 +18,7 @@ Python 3.6 or later
 Installation
 Clone the repository to your local machine:
 Bash
-
-git clone https://github.com/YourUsername/file-organizer-tool.git
+git clone https://github.com/emreozkan04/Folorg.git
 cd Folorg
 ----------------
 Run the application:
