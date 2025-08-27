@@ -17,11 +17,13 @@ def organize_files(directory_path):
 
     print(f"Starting file organization in '{directory_path}'...")
     
+
     try:
-        file_types = utils.load_config('config.json')
+        file_types = utils.load_config('code\config.json')
     except FileNotFoundError:
         print("Error: config.json not found. Please create one with your sorting rules.")
         return
+
 
     log_data = []
     

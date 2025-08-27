@@ -17,7 +17,7 @@ from organizer import (
 class FileOrganizerApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("File Organizer")
+        self.root.title("Folorg")
         self.root.geometry("600x400")
         
         self.style = ttk.Style(theme="litera")
@@ -27,7 +27,7 @@ class FileOrganizerApp:
         main_frame = ttk.Frame(root, padding=20)
         main_frame.pack(fill=BOTH, expand=True)
 
-        title_label = ttk.Label(main_frame, text="File Organizer", font=("Helvetica", 24, "bold"), anchor="center")
+        title_label = ttk.Label(main_frame, text="Folorg", font=("Helvetica", 24, "bold"), anchor="center")
         title_label.pack(pady=(0, 20))
 
         dir_frame = ttk.Frame(main_frame)
